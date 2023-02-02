@@ -91,7 +91,7 @@ const form = async (url) => {
 
     //const browser = await puppeteer.launch( {executablePath: '/usr/local/bin/chromium', headless:false, args: ['--no-sandbox', '--disable-setuid-sandbox', '--no-first-run', '--no-default-browser-check']});
 
-    const browser = await puppeteer.launch( { executablePath: '/usr/local/bin/chromium', headless: true } );
+    const browser = await puppeteer.launch( { executablePath: '/usr/local/bin/chromium'} );
 
     //@dev Reuse same tab in browser window.
     const pages = await browser.pages();
