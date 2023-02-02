@@ -2,6 +2,8 @@ import puppeteer from 'puppeteer';
 import fs from 'fs-extra';
 import bodyParser from 'body-parser';
 import express from 'express';
+import chromium from 'chromium';
+import {execFile} from 'child_process';
 
 // import path from 'path';
 // import { fileURLToPath } from 'url';
@@ -87,7 +89,11 @@ const form = async (url) => {
     //@dev Differs by report. Need to add link to video to report when calling script.
     let scamLink = url;
 
-    const browser = await puppeteer.launch({headless:false});
+    const browser = await puppeteer.launch( { executablePath: chromium.path}, {headless:false} );
+
+    // execFile(chromium.path, ['https://google.com'], err => {
+    //     console.log('Hello Google!');
+    // });
 
     //@dev Reuse same tab in browser window.
     const pages = await browser.pages();
