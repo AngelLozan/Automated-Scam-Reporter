@@ -13,7 +13,7 @@ app.use(bodyParser.json())
 
 
 app.get("/", (req, res) => {
-    res.json("Server is ready.")
+    res.json({message: "Server is ready."})
 })
 
 app.get("/api/ready", (req, res) => {
