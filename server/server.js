@@ -90,12 +90,8 @@ const form = async (url) => {
     let scamLink = url;
 
     const browser = await puppeteer.launch( { executablePath: '/usr/local/bin/chromium', headless:false} );
-    
-    //@dev Works: const browser = await puppeteer.launch( { executablePath: chromium.path, headless:true} );
 
-    // execFile(chromium.path, ['https://google.com'], err => {
-    //     console.log('Hello Google!');
-    // });
+    //@dev Works: const browser = await puppeteer.launch( { executablePath: chromium.path, headless:true} );
 
     //@dev Reuse same tab in browser window.
     const pages = await browser.pages();
