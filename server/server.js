@@ -89,7 +89,9 @@ const form = async (url) => {
     //@dev Differs by report. Need to add link to video to report when calling script.
     let scamLink = url;
 
-    const browser = await puppeteer.launch( { executablePath: chromium.path, headless:true} );
+    const browser = await puppeteer.launch( { executablePath: '/usr/local/bin/chromium', headless:false} );
+    
+    //@dev Works: const browser = await puppeteer.launch( { executablePath: chromium.path, headless:true} );
 
     // execFile(chromium.path, ['https://google.com'], err => {
     //     console.log('Hello Google!');
