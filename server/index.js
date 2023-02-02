@@ -3,6 +3,11 @@ import fs from 'fs-extra';
 import bodyParser from 'body-parser';
 import express from 'express';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(__filename);
 
 const PORT = process.env.PORT || 8080;
 
@@ -12,10 +17,10 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join('./client/build')));
+  app.use(express.static(path.join(__dirname, './client/build')));
 
   app.get('*', function(req, res) {
-    res.sendFile(path.join('./client/build', 'index.html'));
+    res.sendFile(path.join(__dirname, './client/build', 'index.html'));
   });
 }
 
