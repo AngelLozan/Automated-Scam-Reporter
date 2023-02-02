@@ -1,0 +1,6 @@
+.env
+node_modules
+package-lock.json
+user_data/
+.DS_Store
+spam.txt
