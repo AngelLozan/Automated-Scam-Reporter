@@ -1,8 +1,7 @@
-const puppeteer = require('puppeteer');
-const fs = require('fs-extra');
-const bodyParser = require('body-parser')
-
-const express = require("express");
+import puppeteer from 'puppeteer';
+import fs from 'fs-extra';
+import bodyParser from 'body-parser';
+import express from 'express';
 
 const PORT = process.env.PORT || 8080;
 
