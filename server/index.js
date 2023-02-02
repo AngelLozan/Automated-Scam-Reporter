@@ -116,9 +116,11 @@ const form = async (url) => {
         let exists = await Object.values(err).includes("TimeoutError");
 
         if (exists) {
-            console.log(" ✔ Timed out, but that's normal")
+            console.log(" ✔ Timed out, but that's normal");
+            return('✔ Timed out');
         } else {
             console.log("🛑 Error occurred, please check your node server console as well: ", { err });
+            return('"🛑 Error occurred, please check your node server:', err.message );
         }
 
     } 
