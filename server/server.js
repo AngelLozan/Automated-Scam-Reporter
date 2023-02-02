@@ -53,8 +53,6 @@ app.get("/api/ready", (req, res) => {
 })
 
 
-
-
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
 });
@@ -91,9 +89,9 @@ const form = async (url) => {
     //@dev Differs by report. Need to add link to video to report when calling script.
     let scamLink = url;
 
-    const browser = await puppeteer.launch( { executablePath: '/Applications/Chromium.app/Contents/MacOS/Chromium', ignoreDefaultArgs: ['--disable-extensions'], args: ['--no-sandbox', '--disable-setuid-sandbox', '--no-first-run', '--no-default-browser-check'], headless:false });
+    const browser = await puppeteer.launch( {headless:false, args: ['--no-sandbox', '--disable-setuid-sandbox', '--no-first-run', '--no-default-browser-check']});
 
-    //@dev Works: const browser = await puppeteer.launch( { executablePath: chromium.path, headless:true} );
+    //@dev Works: const browser = await puppeteer.launch( { executablePath: chromium.path} );
 
     //@dev Reuse same tab in browser window.
     const pages = await browser.pages();
