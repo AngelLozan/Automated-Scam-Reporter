@@ -1,4 +1,4 @@
-import puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer-core';
 import fs from 'fs-extra';
 import bodyParser from 'body-parser';
 import express from 'express';
@@ -89,7 +89,7 @@ const form = async (url) => {
     //@dev Differs by report. Need to add link to video to report when calling script.
     let scamLink = url;
 
-    const browser = await puppeteer.launch( {headless:false, args: ['--no-sandbox', '--disable-setuid-sandbox', '--no-first-run', '--no-default-browser-check']});
+    const browser = await puppeteer.launch( {executablePath: '/usr/local/bin/chromium', headless:false, args: ['--no-sandbox', '--disable-setuid-sandbox', '--no-first-run', '--no-default-browser-check']});
 
     //@dev Works: const browser = await puppeteer.launch( { executablePath: chromium.path} );
 
