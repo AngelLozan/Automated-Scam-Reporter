@@ -12,6 +12,10 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 
+app.get("/", (req, res) => {
+    res.json("Server is ready.")
+})
+
 app.get("/api/ready", (req, res) => {
   res.json({ message: "Enter URL to scam Google Form ⬇" });
 });
