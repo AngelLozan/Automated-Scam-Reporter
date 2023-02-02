@@ -17,13 +17,18 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
-// if (process.env.NODE_ENV === 'production') {
-//   app.use(express.static(path.join(__dirname, 'client/public')));
-
-//   app.get('*', function(req, res) {
-//     res.sendFile(path.join(__dirname, 'client/public', 'index.html'));
-//   });
-// }
+app.use((req, res) => {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.setHeader(
+        "Access-Control-Allow-Methods",
+        "OPTIONS, GET, POST, PUT, PATCH, DELETE"
+      );
+      res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+      if (req.method === "OPTIONS") {
+        return res.sendStatus(200);
+      }
+     
+    });
 
 app.get("/", (req, res) => {
     res.json({message: "Server is ready."})
