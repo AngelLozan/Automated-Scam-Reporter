@@ -32,7 +32,7 @@ function App() {
   }
 
   React.useEffect(() => {
-    fetch("/api/ready")
+    fetch("https://autoreporter.onrender.com/api/ready")
       .then((res) => res.json())
       .then((r) => setReady(r.message));
   }, []);
