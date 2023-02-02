@@ -72,11 +72,21 @@ const form = async (url) => {
         }, 150);
     })();
 
+    let execPath;
+
+    function executablePathFinder(){
+        if (os.arch() === 'arm64') {
+            execPath = '/Applications/Chromium.app/Contents/MacOS/Chromium';
+        }
+    };
+
     function delay(time) {
         return new Promise(function(resolve) {
             setTimeout(resolve, time)
         });
-    }
+    };
+
+    await executablePathFinder();
 
     async function getReport(_page, _delay) {
         console.log("==> Getting link to form report and navigating there, stand by...")
@@ -89,7 +99,7 @@ const form = async (url) => {
     //@dev Differs by report. Need to add link to video to report when calling script.
     let scamLink = url;
 
-    const browser = await puppeteer.launch( { executablePath: '/usr/local/bin/chromium', headless:false} );
+    const browser = await puppeteer.launch( { executablePath: execPath, ignoreDefaultArgs: ['--disable-extensions'], args: ['--no-sandbox', '--disable-setuid-sandbox', '--no-first-run', '--no-default-browser-check'], headless:false} );
 
     //@dev Works: const browser = await puppeteer.launch( { executablePath: chromium.path, headless:true} );
 
