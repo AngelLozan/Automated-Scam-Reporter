@@ -32,7 +32,7 @@ function App() {
   }
 
   React.useEffect(() => {
-    fetch("https://autoreporter.onrender.com/", {
+    fetch("https://autoreporter.onrender.com/api/ready", {
       method: "GET"
     })
       .then((res) => res.json())
