@@ -9,7 +9,7 @@ function App() {
 
   
   const form = (e) => {
-    fetch('/api', {
+    fetch('https://autoreporter.onrender.com/api', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({URL: `${urlData}`}),//JSON.stringify(urlData),

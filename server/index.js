@@ -2,6 +2,7 @@ import puppeteer from 'puppeteer';
 import fs from 'fs-extra';
 import bodyParser from 'body-parser';
 import express from 'express';
+import path from 'path';
 
 const PORT = process.env.PORT || 8080;
 
@@ -29,6 +30,15 @@ app.get("/api/ready", (req, res) => {
     res.send()
 
 })
+
+if (process.env.NODE_ENV === 'production') {
+  // Serve any static files
+  app.use(express.static(path.join(__dirname, 'client/build')));
+  // Handle React routing, return all requests to React app
+  app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
+}
 
 
 app.listen(PORT, () => {
