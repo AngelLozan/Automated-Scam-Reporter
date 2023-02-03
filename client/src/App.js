@@ -14,7 +14,7 @@ function App() {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({URL: `${urlData}`}),//JSON.stringify(urlData),
     })
-      .then((res) => res.json())
+      .then((res) => res)
       .then((result) => setData(result))
       .catch((err) => console.log('error'))
   }

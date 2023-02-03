@@ -46,9 +46,7 @@ app.get("/api/ready", (req, res) => {
         
         const confirm = await form(URL);
         res.set('Content-Type', 'image/png');
-        res.json(confirm);
-
-    res.send()
+        res.send(confirm)
 
 })
 
