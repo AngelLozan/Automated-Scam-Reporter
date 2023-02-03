@@ -45,7 +45,6 @@ app.get("/api/ready", (req, res) => {
         console.log('==> URL is: ', URL)
         
         const confirm = await form(URL);
-        //res.set('Content-Type', 'image/png');
         res.json({message: confirm });
 
         res.send()

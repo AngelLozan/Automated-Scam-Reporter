@@ -12,5 +12,7 @@ Server: https://autoreporter.onrender.com/
 
 - `/api/ready` is an additional GET request you can test on the server. 
   
+  Local testing add   `"proxy": "http://localhost:8080",` to root package.json (above eslint)
+  
 
 
