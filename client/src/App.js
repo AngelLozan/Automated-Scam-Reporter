@@ -102,7 +102,7 @@ function App() {
 
             <div className="imageDiv">
             {showImg &&
-            <img className="screenshot" alt="Reporting Result Will Show Here" src={`data:image/jpeg;base64,${Data}` } />
+            <img className="screenshot" alt="Something went wrong, submit again." src={`data:image/jpeg;base64,${Data}` } />
             }
             </div>
             
