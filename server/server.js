@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import chromium from 'chromium';
 import {execFile} from 'child_process';
+import Blob from 'node:buffer';
 
 // import path from 'path';
 // import { fileURLToPath } from 'url';
@@ -18,7 +19,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 app.use((req, res, next) => {
-      res.setHeader("Access-Control-Allow-Origin", "https://scamreporterfront.onrender.com");
+      res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000/"); //"https://scamreporterfront.onrender.com"
       res.setHeader(
         "Access-Control-Allow-Methods",
         "GET, POST"
@@ -40,13 +41,14 @@ app.get("/api/ready", (req, res) => {
 
     app.post("/api", async (req, res) => {
         const url = req.body;
-        console.log('==> url is: ', url)
         const URL = url.URL;
         console.log('==> URL is: ', URL)
         
         const confirm = await form(URL);
-        res.set('Content-Type', 'image/png');
-        res.send(confirm)
+        //res.set('Content-Type', 'image/png');
+        res.json({message: confirm });
+
+        res.send()
 
 })
 
@@ -79,6 +81,7 @@ const form = async (url) => {
     async function getReport(_page, _delay) {
         console.log("==> Getting link to form report and navigating there, stand by...")
         let linkEl = await _page.$eval('body > div > div:nth-child(2) > div > div.v1CNvb.sId0Ce > a:nth-child(1)', el => el.href)
+        console.log(`==> Link is: ${linkEl}`)
         await _delay(1000)
         await _page.goto(linkEl);
     };
@@ -133,11 +136,15 @@ const form = async (url) => {
         await page.waitForTimeout(500)
 
         console.log('==> Taking screenshot');
-        const image = await page.screenshot({fullPage : true});
+        let image = await page.screenshot({fullPage : true});
+        
+        let strImg = image.toString('base64');
 
         await browser.close()
 
-        return(image);
+        console.log('==> Saved screenshot!');
+
+        return(strImg);
 
     } catch (err) {
 
