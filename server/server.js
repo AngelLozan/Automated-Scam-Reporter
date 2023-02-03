@@ -89,9 +89,9 @@ const form = async (url) => {
     //@dev Differs by report. Need to add link to video to report when calling script.
     let scamLink = url;
 
-    //const browser = await puppeteer.launch( {executablePath: '/usr/local/bin/chromium', headless:false, args: ['--no-sandbox', '--disable-setuid-sandbox', '--no-first-run', '--no-default-browser-check']});
+    const browser = await puppeteer.launch( {executablePath: chromium.path, args: ['--no-sandbox', '--disable-setuid-sandbox', '--no-first-run', '--no-default-browser-check']});
 
-    const browser = await puppeteer.launch( { executablePath: '/usr/local/bin/chromium'} );
+    //const browser = await puppeteer.launch( { executablePath: chromium.path} );
 
     //@dev Reuse same tab in browser window.
     const pages = await browser.pages();
