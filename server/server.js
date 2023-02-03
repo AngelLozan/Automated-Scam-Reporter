@@ -7,9 +7,7 @@ import {execFile} from 'child_process';
 
 // import path from 'path';
 // import { fileURLToPath } from 'url';
-
 // const __filename = fileURLToPath(import.meta.url);
-
 // const __dirname = path.dirname(__filename);
 
 const PORT = process.env.PORT || 8080;
@@ -89,9 +87,10 @@ const form = async (url) => {
     //@dev Differs by report. Need to add link to video to report when calling script.
     let scamLink = url;
 
+    //@dev Executable path comes from chromium package. Error thrown when attempt to download chromium with head and without specified package. 
     const browser = await puppeteer.launch( {executablePath: chromium.path, args: ['--no-sandbox', '--disable-setuid-sandbox', '--no-first-run', '--no-default-browser-check']});
 
-    //const browser = await puppeteer.launch( { executablePath: chromium.path} );
+    //const browser = await puppeteer.launch( { executablePath: chromium.path} ); @dev this does not work. 
 
     //@dev Reuse same tab in browser window.
     const pages = await browser.pages();
