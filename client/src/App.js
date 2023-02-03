@@ -4,7 +4,7 @@ import './App.css';
 
 function App() {
    const [ready, setReady] = React.useState(null);
-   const [data, setData] = React.useState(null);
+   const [Data, setData] = React.useState(null);
    const [urlData, setUrlData] = React.useState(null);
 
   
@@ -12,10 +12,11 @@ function App() {
     fetch('https://autoreporter.onrender.com/api', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({URL: `${urlData}`}),//JSON.stringify(urlData),
+      body: JSON.stringify({URL: `${urlData}`}),
     })
-      .then((res) => res)
-      .then((result) => setData(result))
+      //.then((res) => res.data)
+      //.then((result) => setData(result))
+      .then(setData('https://scamreporterfront.onrender.com/?url=' + `${urlData}`))
       .catch((err) => console.log('error'))
   }
 
@@ -52,9 +53,9 @@ function App() {
                 <input type="text" value={urlData} onChange={handleChange} tabindex="1"/>
                 <button type="submit" tabindex="2"> Report </button>
       </form>
-            <p>
-            {!data ? "Script complete message will show here." : data}
-            </p>
+            
+            <img src = {!Data ? 'Image' : Data} />
+            
     </div>
   );
 }
