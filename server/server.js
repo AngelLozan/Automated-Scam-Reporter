@@ -43,8 +43,10 @@ app.get("/api/ready", (req, res) => {
         console.log('==> url is: ', url)
         const URL = url.URL;
         console.log('==> URL is: ', URL)
+        
         const confirm = await form(URL);
-        res.json({ message: confirm });
+        res.set('Content-Type', 'image/png');
+        res.json(confirm);
 
     res.send()
 
@@ -130,10 +132,14 @@ const form = async (url) => {
 
         console.log(`✅ Successfully reported form: ${scamLink}`)
 
+        await page.waitForTimeout(500)
+
+        console.log('==> Taking screenshot');
+        const image = await page.screenshot({fullPage : true});
+
         await browser.close()
 
-        
-        return(`✅ Successfully reported form: ${scamLink}`);
+        return(image);
 
     } catch (err) {
 

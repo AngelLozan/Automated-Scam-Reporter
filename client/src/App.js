@@ -15,7 +15,7 @@ function App() {
       body: JSON.stringify({URL: `${urlData}`}),//JSON.stringify(urlData),
     })
       .then((res) => res.json())
-      .then((result) => setData(result.message))
+      .then((result) => setData(result))
       .catch((err) => console.log('error'))
   }
 
