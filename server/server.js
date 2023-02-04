@@ -59,16 +59,6 @@ app.listen(PORT, () => {
 
 const form = async (url) => {
 
-    //@dev Change pace of spin with timeout near bottom. Just for kicks. 
-    var timerAnimation = (function() {
-        var P = ["[\\]", "[|]", "[/]", "[-]"];
-        var start = 0;
-        return setInterval(function() {
-            process.stdout.write("\r" + P[start++]);
-            start &= 3;
-        }, 150);
-    })();
-
     function delay(time) {
         return new Promise(function(resolve) {
             setTimeout(resolve, time)
@@ -76,17 +66,16 @@ const form = async (url) => {
     };
 
 
-
     async function getReport(_page, _delay) {
         console.log("==> Getting link to form report and navigating there, stand by...")
         let linkEl = await _page.$eval('body > div > div:nth-child(2) > div > div.v1CNvb.sId0Ce > a:nth-child(1)', el => el.href)
-        console.log(`==> Link is: ${linkEl}`)
+        //console.log(`==> Link is: ${linkEl}`)
         await _delay(1000)
         await _page.goto(linkEl);
     };
 
 
-    //@dev Differs by report. Need to add link to video to report when calling script.
+    //@dev Scam form link 
     let scamLink = url;
 
     //@dev Executable path comes from chromium package. Error thrown when attempt to download chromium with head and without specified package. 

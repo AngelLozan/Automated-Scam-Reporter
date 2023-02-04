@@ -41,7 +41,7 @@ button[type=submit]:hover {
   margin-left: auto;
   margin-right: auto;
   max-width: 100%;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
 }
 
 .App {
@@ -82,6 +82,7 @@ button[type=submit]:hover {
   font-size: calc(10px + 2vmin);
   color: white;
   margin: 10px;
+  border-radius: 4px;
 }
 
 .App-link {
