@@ -29,7 +29,7 @@ const client = new OAuth2Client(GOOGLE_CLIENT_ID);
 let DB = [];
 
 app.use((req, res, next) => {
-      res.setHeader("Access-Control-Allow-Origin", "https://scamreporterfront.onrender.com", "https://scamreporterfront.onrender.com/signup", "https://scamreporterfront.onrender.com/generalgoogle", "https://scamreporterfront.onrender.com/login"); //@dev "https://scamreporterfront.onrender.com" For local: "http://localhost:3000/"
+      res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000/"); //@dev "https://scamreporterfront.onrender.com", "https://scamreporterfront.onrender.com/signup", "https://scamreporterfront.onrender.com/generalgoogle", "https://scamreporterfront.onrender.com/login" For local: "http://localhost:3000/"
       res.setHeader(
         "Access-Control-Allow-Methods",
         "GET,POST,PUT,DELETE,OPTIONS"
@@ -62,9 +62,9 @@ async function verifyGoogleToken(token) {
       idToken: token,
       audience: GOOGLE_CLIENT_ID,
     });
-    let pay = ticket.getPayload();
+    const pay = ticket.getPayload();
     console.log("==> ticket.getPayload(): ", pay)
-    return { payload: ticket.getPayload() };
+    return { payload: pay };
   } catch (error) {
     return { error: "Invalid user detected. Please try again" };
   }
@@ -73,9 +73,11 @@ async function verifyGoogleToken(token) {
 
 
 app.post("/signup", async (req, res) => {
+
   try {
-    console.log({ verified: verifyGoogleToken(req.body.credential) });
+    //console.log({ verified: verifyGoogleToken(req.body.credential) });
     if (req.body.credential) {
+
       const verificationResponse = await verifyGoogleToken(req.body.credential);
       console.log("==> Verification signup: ", verificationResponse)
       if (verificationResponse.error) {
@@ -92,6 +94,7 @@ app.post("/signup", async (req, res) => {
 
       res.status(201).json({
         message: "Signup was successful",
+        status: 201,
         user: {
           firstName: profile?.given_name,
           lastName: profile?.family_name,
@@ -99,9 +102,10 @@ app.post("/signup", async (req, res) => {
           email: profile?.email,
           token: jwt.sign({ email: profile?.email }, "myScret", {
             expiresIn: "1d",
-          }),
-        },
-      });
+          })
+        }
+      })
+
     }
   } catch (error) {
     console.log('==> Error at sign up registration failed.')
@@ -112,10 +116,12 @@ app.post("/signup", async (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
+
   try {
+
     if (req.body.credential) {
       const verificationResponse = await verifyGoogleToken(req.body.credential);
-      console.log("==> Verification login: ", verificationResponse)
+
       if (verificationResponse.error) {
         console.log('==> Error at login verification response.')
         return res.status(400).json({
@@ -136,6 +142,7 @@ app.post("/login", async (req, res) => {
 
       res.status(201).json({
         message: "Login was successful",
+        status: 201,
         user: {
           firstName: profile?.given_name,
           lastName: profile?.family_name,
@@ -143,12 +150,11 @@ app.post("/login", async (req, res) => {
           email: profile?.email,
           token: jwt.sign({ email: profile?.email }, process.env.JWT_SECRET, {
             expiresIn: "1d",
-          }),
-        },
-      });
+          })
+        }
+      })
     }
   } catch (error) {
-    console.log('==> Error at login registration failed.')
     res.status(500).json({
       message: error?.message || error,
     });

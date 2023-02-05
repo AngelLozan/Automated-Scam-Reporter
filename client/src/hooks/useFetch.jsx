@@ -3,14 +3,15 @@ import { useState } from "react";
 const useFetch = (url) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-//"Cross-Origin-Opener-Policy": "same-origin-allow-popups",
+
 
   const handleGoogle = async (response) => {
-    //setLoading(true);
+    setLoading(true);
     fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Cross-Origin-Opener-Policy": "same-origin-allow-popups",
       },
       body: JSON.stringify({ credential: response.credential }),
     })
@@ -32,7 +33,7 @@ const useFetch = (url) => {
         setError(error?.message);
       });
   };
-  return { loading, error, handleGoogle };
+  return { loading, handleGoogle, error };
 };
 
 export default useFetch;

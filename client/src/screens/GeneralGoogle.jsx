@@ -19,7 +19,7 @@ const GeneralGoogle = ({user}) => {
 
 
     const form = (e) => {
-        fetch('https://autoreporter.onrender.com/api', { //@dev https://autoreporter.onrender.com/api for local test: /api
+        fetch('/api', { //@dev https://autoreporter.onrender.com/api for local test: /api
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ URL: `${urlData}` }), //JSON.stringify(urlData),
@@ -58,7 +58,7 @@ const GeneralGoogle = ({user}) => {
     }
 
     const serverReady = () => {
-        fetch("https://autoreporter.onrender.com/api/ready") //@dev https://autoreporter.onrender.com/api/ready for local test: /api/ready
+        fetch("/api/ready") //@dev https://autoreporter.onrender.com/api/ready for local test: /api/ready
             .then((res) => res.json())
             .then((r) => {
                 console.log(r)
@@ -104,6 +104,7 @@ const GeneralGoogle = ({user}) => {
              ref={textAreaRef} 
              onClick={copyToClipboard}
              value={report}
+             readOnly
              />
 
             <br/>
