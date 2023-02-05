@@ -63,8 +63,8 @@ async function verifyGoogleToken(token) {
       audience: GOOGLE_CLIENT_ID,
     });
     const pay = ticket.getPayload();
-    console.log("==> ticket.getPayload(): ", pay)
     return { payload: pay };
+    
   } catch (error) {
     return { error: "Invalid user detected. Please try again" };
   }
@@ -75,13 +75,12 @@ async function verifyGoogleToken(token) {
 app.post("/signup", async (req, res) => {
 
   try {
-    //console.log({ verified: verifyGoogleToken(req.body.credential) });
+    
     if (req.body.credential) {
 
       const verificationResponse = await verifyGoogleToken(req.body.credential);
-      console.log("==> Verification signup: ", verificationResponse)
+      
       if (verificationResponse.error) {
-        console.log('==> Error at signup verification response.')
         return res.status(400).json({
           message: verificationResponse.error,
         });

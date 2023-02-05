@@ -14,15 +14,19 @@ const useFetch = (url) => {
       },
       body: JSON.stringify({ credential: response.credential }),
     })
-      .then((res) => res.json())
-      .then((data) => {
+      .then((res) => {
         setLoading(false);
-        // if (data?.user) {
+        let returned = res.json();
+        console.log(returned)
+        return returned;
+      })
+      .then((data) => {
+        if (data?.user) {
           localStorage.setItem("user", JSON.stringify(data?.user));
           window.location.reload();
-        //}
+        }
 
-        //throw new Error(data?.message || data);
+        throw new Error(data?.message || data);
       })
       .catch((error) => {
         setError(error?.message);
