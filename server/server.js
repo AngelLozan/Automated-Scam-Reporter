@@ -137,7 +137,7 @@ app.post("/login", async (req, res) => {
           message: "You are not registered. Please sign up",
         });
       }
-      res.set("Content-Type": "application/json");
+      res.set("Content-Type", "application/json");
       res.status(201).json({
         user: {
           firstName: profile?.given_name,
