@@ -4,6 +4,8 @@ import useFetch from "../hooks/useFetch";
 
 // https://developers.google.com/identity/gsi/web/reference/js-reference
 
+
+
 const Login = () => {
   const { handleGoogle, loading, error } = useFetch(
     "https://scamreporterfront.onrender.com/login"
@@ -17,15 +19,15 @@ const Login = () => {
         callback: handleGoogle,
       });
 
-      google.accounts.id.renderButton(document.getElementById("loginDiv"), {
-        // type: "standard",
-        theme: "filled_black",
-        // size: "small",
-        text: "signin_with",
-        shape: "pill",
-      });
+      // google.accounts.id.renderButton(document.getElementById("loginDiv"), {
+      //   // type: "standard",
+      //   theme: "filled_black",
+      //   // size: "small",
+      //   text: "signin_with",
+      //   shape: "pill",
+      // });
 
-      // google.accounts.id.prompt()
+       google.accounts.id.prompt()
     }
   }, [handleGoogle]);
 

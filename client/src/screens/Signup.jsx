@@ -17,15 +17,15 @@ const SignUp = () => {
         callback: handleGoogle,
       });
 
-      google.accounts.id.renderButton(document.getElementById("signUpDiv"), {
-        // type: "standard",
-        theme: "filled_black",
-        // size: "small",
-        text: "continue_with",
-        shape: "pill",
-      });
+      // google.accounts.id.renderButton(document.getElementById("signUpDiv"), {
+      //   // type: "standard",
+      //   theme: "filled_black",
+      //   // size: "small",
+      //   text: "continue_with",
+      //   shape: "pill",
+      // });
 
-      // google.accounts.id.prompt()
+      google.accounts.id.prompt()
     }
   }, [handleGoogle]);
 
