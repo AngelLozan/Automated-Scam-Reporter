@@ -36,6 +36,20 @@ button[type=submit]:hover {
   background-color: #45a049;
 }
 
+.logout{
+    color: "black";
+    border: "1px solid gray";
+    backgroundColor: "white";
+    padding: "0.5rem 1rem";
+    cursor: "pointer";
+}
+
+.logout:hover{
+  background-color: orangered;
+  color: white;
+}
+
+
 .screenshot {
   display: block;
   margin-left: auto;
