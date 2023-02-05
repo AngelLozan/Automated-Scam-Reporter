@@ -6,7 +6,7 @@ import useFetch from "../hooks/useFetch";
 
 const SignUp = () => {
   const { handleGoogle, loading, error } = useFetch(
-    "http://localhost:3000/signup"
+    "https://scamreporterfront.onrender.com/signup"
   );
 
   useEffect(() => {
