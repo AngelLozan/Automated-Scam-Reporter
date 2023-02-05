@@ -26,6 +26,19 @@ const app = express();
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const client = new OAuth2Client(GOOGLE_CLIENT_ID);
 
+app.use((req, res, next) => {
+      res.setHeader("Access-Control-Allow-Origin", "https://scamreporterfront.onrender.com"); //@dev "https://scamreporterfront.onrender.com" For local: "http://localhost:3000/"
+      res.setHeader(
+        "Access-Control-Allow-Methods",
+        "GET,POST,PUT,DELETE,OPTIONS"
+      );
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+      res.header("Cross-Origin-Opener-Policy", "same-origin-allow-popups")
+      res.header("Access-Control-Allow-credentials", true);
+      res.header("Access-Control-Allow-Headers", "Content-Type");
+      next();
+    });
+
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 // app.use(
@@ -51,17 +64,7 @@ async function verifyGoogleToken(token) {
   }
 }
 
-app.use((req, res, next) => {
-      res.setHeader("Access-Control-Allow-Origin", "https://scamreporterfront.onrender.com"); //@dev "https://scamreporterfront.onrender.com" For local: "http://localhost:3000/"
-      res.setHeader(
-        "Access-Control-Allow-Methods",
-        "GET,POST,PUT,DELETE,OPTIONS"
-      );
-      res.header("Cross-Origin-Opener-Policy", "same-origin-allow-popups")
-      res.header("Access-Control-Allow-credentials", true);
-      res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-      next();
-    });
+
 
 app.post("/signup", async (req, res) => {
   try {
