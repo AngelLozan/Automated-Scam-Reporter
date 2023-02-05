@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import fs from 'fs-extra';
-import bodyParser from 'body-parser';
+//import bodyParser from 'body-parser';
 import express from 'express';
 import chromium from 'chromium';
 import {execFile} from 'child_process';
@@ -29,7 +29,7 @@ const client = new OAuth2Client(GOOGLE_CLIENT_ID);
 let DB = [];
 
 app.use((req, res, next) => {
-      res.setHeader("Access-Control-Allow-Origin", ["https://scamreporterfront.onrender.com", "https://scamreporterfront.onrender.com/signup", "https://scamreporterfront.onrender.com/generalgoogle", "https://scamreporterfront.onrender.com/login"]); //@dev "https://scamreporterfront.onrender.com" For local: "http://localhost:3000/"
+      res.setHeader("Access-Control-Allow-Origin", "https://scamreporterfront.onrender.com", "https://scamreporterfront.onrender.com/signup", "https://scamreporterfront.onrender.com/generalgoogle", "https://scamreporterfront.onrender.com/login"); //@dev "https://scamreporterfront.onrender.com" For local: "http://localhost:3000/"
       res.setHeader(
         "Access-Control-Allow-Methods",
         "GET,POST,PUT,DELETE,OPTIONS"
@@ -41,8 +41,8 @@ app.use((req, res, next) => {
       next();
     });
 
-app.use(bodyParser.urlencoded({extended: true}))
-app.use(bodyParser.json())
+// app.use(bodyParser.urlencoded({extended: true}))
+// app.use(bodyParser.json())
 
 //@dev can use cors package, but does not set correct headers.
 // app.use(
@@ -63,7 +63,7 @@ async function verifyGoogleToken(token) {
       audience: GOOGLE_CLIENT_ID,
     });
     let pay = ticket.getPayload();
-    console.log(pay)
+    console.log("==> ticket.getPayload(): ", pay)
     return { payload: ticket.getPayload() };
   } catch (error) {
     return { error: "Invalid user detected. Please try again" };
@@ -77,15 +77,16 @@ app.post("/signup", async (req, res) => {
     console.log({ verified: verifyGoogleToken(req.body.credential) });
     if (req.body.credential) {
       const verificationResponse = await verifyGoogleToken(req.body.credential);
-      console.log("verification signup: ", verificationResponse)
+      console.log("==> Verification signup: ", verificationResponse)
       if (verificationResponse.error) {
+        console.log('==> Error at signup verification response.')
         return res.status(400).json({
           message: verificationResponse.error,
         });
       }
 
       const profile = verificationResponse?.payload;
-      console.log("Profile: ", profile)
+      console.log("==> Profile: ", profile)
 
       DB.push(profile);
 
@@ -103,6 +104,7 @@ app.post("/signup", async (req, res) => {
       });
     }
   } catch (error) {
+    console.log('==> Error at sign up registration failed.')
     res.status(500).json({
       message: "An error occurred. Registration failed.",
     });
@@ -113,14 +115,16 @@ app.post("/login", async (req, res) => {
   try {
     if (req.body.credential) {
       const verificationResponse = await verifyGoogleToken(req.body.credential);
-      console.log("verification login: ", verificationResponse)
+      console.log("==> Verification login: ", verificationResponse)
       if (verificationResponse.error) {
+        console.log('==> Error at login verification response.')
         return res.status(400).json({
           message: verificationResponse.error,
         });
       }
 
       const profile = verificationResponse?.payload;
+      console.log("==> Profile: ", profile)
 
       const existsInDB = DB.find((person) => person?.email === profile?.email);
 
@@ -144,6 +148,7 @@ app.post("/login", async (req, res) => {
       });
     }
   } catch (error) {
+    console.log('==> Error at login registration failed.')
     res.status(500).json({
       message: error?.message || error,
     });

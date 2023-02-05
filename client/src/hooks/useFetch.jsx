@@ -6,7 +6,7 @@ const useFetch = (url) => {
 //"Cross-Origin-Opener-Policy": "same-origin-allow-popups",
 
   const handleGoogle = async (response) => {
-    setLoading(true);
+    //setLoading(true);
     fetch(url, {
       method: "POST",
       headers: {
