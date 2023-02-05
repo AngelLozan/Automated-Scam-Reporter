@@ -57,7 +57,7 @@ app.use((req, res, next) => {
         "Access-Control-Allow-Methods",
         "GET,POST,PUT,DELETE,OPTIONS"
       );
-      res.setHeader('Cross-Origin-Opener-Policy': 'same-origin-allow-popups')
+      res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups')
       res.header("Access-Control-Allow-credentials", true);
       res.setHeader("Access-Control-Allow-Headers", "Content-Type");
       next();
