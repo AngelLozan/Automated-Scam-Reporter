@@ -10,6 +10,7 @@ const App = () => {
     const theUser = localStorage.getItem("user");
 
     if (theUser && !theUser.includes("undefined")) {
+      console.log(theUser)
       setUser(JSON.parse(theUser));
     }
   }, []);
