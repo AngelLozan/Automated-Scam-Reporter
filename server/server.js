@@ -101,7 +101,7 @@ app.post("/signup", async (req, res) => {
           picture: profile?.picture,
           email: profile?.email,
           token: jwt.sign({ email: profile?.email }, "myScret", {
-            expiresIn: "1d",
+            expiresIn: "1d"
           })
         }
       })
@@ -149,7 +149,7 @@ app.post("/login", async (req, res) => {
           picture: profile?.picture,
           email: profile?.email,
           token: jwt.sign({ email: profile?.email }, process.env.JWT_SECRET, {
-            expiresIn: "1d",
+            expiresIn: "1d"
           })
         }
       })

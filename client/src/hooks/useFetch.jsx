@@ -10,24 +10,19 @@ const useFetch = (url) => {
     fetch(url, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        "Cross-Origin-Opener-Policy": "same-origin-allow-popups",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({ credential: response.credential }),
     })
-      .then((res) => {
-        setLoading(false);
-        let returned = res.json();
-        console.log(returned)
-        return returned;
-      })
+      .then((res) => res.json())
       .then((data) => {
-        if (data?.user) {
+        setLoading(false);
+        // if (data?.user) {
           localStorage.setItem("user", JSON.stringify(data?.user));
           window.location.reload();
-        }
+        //}
 
-        throw new Error(data?.message || data);
+        //throw new Error(data?.message || data);
       })
       .catch((error) => {
         setError(error?.message);
