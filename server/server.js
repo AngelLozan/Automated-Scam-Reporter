@@ -30,8 +30,9 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(
   cors({
-    origin: ["https://scamreporterfront.onrender.com"], //@dev local dev http://localhost:3000
+    origin: ["https://scamreporterfront.onrender.com", "https://scamreporterfront.onrender.com/signup", "https://scamreporterfront.onrender.com/login", "https://autoreporter.onrender.com"], //@dev local dev http://localhost:3000
     methods: "GET,POST,PUT,DELETE,OPTIONS",
+    credentials: true,
   })
 );
 
@@ -51,11 +52,13 @@ async function verifyGoogleToken(token) {
 }
 
 app.use((req, res, next) => {
-      res.setHeader("Access-Control-Allow-Origin", "https://scamreporterfront.onrender.com/"); //@dev "https://scamreporterfront.onrender.com" For local: "http://localhost:3000/"
+      res.setHeader("Access-Control-Allow-Origin", "https://scamreporterfront.onrender.com"); //@dev "https://scamreporterfront.onrender.com" For local: "http://localhost:3000/"
       res.setHeader(
         "Access-Control-Allow-Methods",
-        "GET, POST"
+        "GET,POST,PUT,DELETE,OPTIONS"
       );
+      res.setHeader('Cross-Origin-Opener-Policy': 'same-origin-allow-popups')
+      res.header("Access-Control-Allow-credentials", true);
       res.setHeader("Access-Control-Allow-Headers", "Content-Type");
       next();
     });
