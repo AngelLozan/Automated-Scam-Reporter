@@ -64,7 +64,7 @@ async function verifyGoogleToken(token) {
     });
     const pay = ticket.getPayload();
     return { payload: pay };
-    
+
   } catch (error) {
     return { error: "Invalid user detected. Please try again" };
   }
@@ -87,13 +87,12 @@ app.post("/signup", async (req, res) => {
       }
 
       const profile = verificationResponse?.payload;
-      console.log("==> Profile: ", profile)
+      
 
       DB.push(profile);
 
+      res.set("Content-Type": "application/json");
       res.status(201).json({
-        message: "Signup was successful",
-        status: 201,
         user: {
           firstName: profile?.given_name,
           lastName: profile?.family_name,
@@ -103,7 +102,7 @@ app.post("/signup", async (req, res) => {
             expiresIn: "1d"
           })
         }
-      })
+      });
 
     }
   } catch (error) {
@@ -138,10 +137,8 @@ app.post("/login", async (req, res) => {
           message: "You are not registered. Please sign up",
         });
       }
-
+      res.set("Content-Type": "application/json");
       res.status(201).json({
-        message: "Login was successful",
-        status: 201,
         user: {
           firstName: profile?.given_name,
           lastName: profile?.family_name,
@@ -151,7 +148,8 @@ app.post("/login", async (req, res) => {
             expiresIn: "1d"
           })
         }
-      })
+      });
+
     }
   } catch (error) {
     res.status(500).json({
