@@ -8,7 +8,7 @@ import useFetch from "../hooks/useFetch";
 
 const Login = () => {
   const { handleGoogle, loading, error } = useFetch(
-    "http://localhost:3000/login"
+    "https://scamreporterfront.onrender.com/login"
   );
   //"https://scamreporterfront.onrender.com/login"  "http://localhost:3000/login"
 
