@@ -8,6 +8,7 @@ const App = () => {
 
   useEffect(() => {
     const theUser = localStorage.getItem("user");
+    console.log(theUser)
 
     if (theUser && !theUser.includes("undefined")) {
       console.log(theUser)

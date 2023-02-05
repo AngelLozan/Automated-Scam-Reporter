@@ -19,15 +19,15 @@ const Login = () => {
         callback: handleGoogle,
       });
 
-      // google.accounts.id.renderButton(document.getElementById("loginDiv"), {
-      //   // type: "standard",
-      //   theme: "filled_black",
-      //   // size: "small",
-      //   text: "signin_with",
-      //   shape: "pill",
-      // });
+      google.accounts.id.renderButton(document.getElementById("loginDiv"), {
+        // type: "standard",
+        theme: "filled_black",
+        // size: "small",
+        text: "signin_with",
+        shape: "pill",
+      });
 
-       google.accounts.id.prompt()
+       //google.accounts.id.prompt()
     }
   }, [handleGoogle]);
 

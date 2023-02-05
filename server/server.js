@@ -43,6 +43,8 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
+
+//@dev can use cors package, but does not set correct headers.
 // app.use(
 //   cors({
 //     origin: ["https://scamreporterfront.onrender.com", "https://scamreporterfront.onrender.com/signup", "https://scamreporterfront.onrender.com/login", "https://autoreporter.onrender.com"], //@dev local dev http://localhost:3000
@@ -60,6 +62,8 @@ async function verifyGoogleToken(token) {
       idToken: token,
       audience: GOOGLE_CLIENT_ID,
     });
+    let pay = ticket.getPayload();
+    console.log(pay)
     return { payload: ticket.getPayload() };
   } catch (error) {
     return { error: "Invalid user detected. Please try again" };
@@ -73,7 +77,7 @@ app.post("/signup", async (req, res) => {
     console.log({ verified: verifyGoogleToken(req.body.credential) });
     if (req.body.credential) {
       const verificationResponse = await verifyGoogleToken(req.body.credential);
-
+      console.log("verification signup: ", verificationResponse)
       if (verificationResponse.error) {
         return res.status(400).json({
           message: verificationResponse.error,
@@ -81,6 +85,7 @@ app.post("/signup", async (req, res) => {
       }
 
       const profile = verificationResponse?.payload;
+      console.log("Profile: ", profile)
 
       DB.push(profile);
 
@@ -108,6 +113,7 @@ app.post("/login", async (req, res) => {
   try {
     if (req.body.credential) {
       const verificationResponse = await verifyGoogleToken(req.body.credential);
+      console.log("verification login: ", verificationResponse)
       if (verificationResponse.error) {
         return res.status(400).json({
           message: verificationResponse.error,

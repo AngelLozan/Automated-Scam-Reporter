@@ -16,7 +16,9 @@ const useFetch = (url) => {
     })
       .then((res) => {
         setLoading(false);
-        return res.json();
+        let returned = res.json();
+        console.log(returned)
+        return returned;
       })
       .then((data) => {
         if (data?.user) {
