@@ -26,6 +26,8 @@ const app = express();
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const client = new OAuth2Client(GOOGLE_CLIENT_ID);
 
+let DB = [];
+
 app.use((req, res, next) => {
       res.setHeader("Access-Control-Allow-Origin", ["https://scamreporterfront.onrender.com", "https://scamreporterfront.onrender.com/signup", "https://scamreporterfront.onrender.com/generalgoogle", "https://scamreporterfront.onrender.com/login"]); //@dev "https://scamreporterfront.onrender.com" For local: "http://localhost:3000/"
       res.setHeader(
@@ -68,7 +70,7 @@ async function verifyGoogleToken(token) {
 
 app.post("/signup", async (req, res) => {
   try {
-    // console.log({ verified: verifyGoogleToken(req.body.credential) });
+    console.log({ verified: verifyGoogleToken(req.body.credential) });
     if (req.body.credential) {
       const verificationResponse = await verifyGoogleToken(req.body.credential);
 
@@ -150,7 +152,7 @@ app.get("/api/ready", (req, res) => {
   res.json({ message: "Enter URL to scam Google Form ⬇" });
 });
 
-let DB = [];
+
 
 
 ;(async () => {
