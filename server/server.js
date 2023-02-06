@@ -29,14 +29,14 @@ const client = new OAuth2Client(GOOGLE_CLIENT_ID);
 let DB = [];
 
 app.use((req, res, next) => {
-      res.setHeader("Access-Control-Allow-Origin", "https://scamreporterfront.onrender.com", "https://scamreporterfront.onrender.com/signup", "https://scamreporterfront.onrender.com/generalgoogle", "https://scamreporterfront.onrender.com/login"); //@dev "https://scamreporterfront.onrender.com", "https://scamreporterfront.onrender.com/signup", "https://scamreporterfront.onrender.com/generalgoogle", "https://scamreporterfront.onrender.com/login" For local: "http://localhost:3000/"
+      res.setHeader("Access-Control-Allow-Origin", "https://scamreporterfront.onrender.com"); //@dev "https://scamreporterfront.onrender.com", "https://scamreporterfront.onrender.com/signup", "https://scamreporterfront.onrender.com/generalgoogle", "https://scamreporterfront.onrender.com/login" For local: "http://localhost:3000/"
       res.setHeader(
         "Access-Control-Allow-Methods",
         "GET,POST,PUT,DELETE,OPTIONS"
       );
       res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
       res.header("Cross-Origin-Opener-Policy", "same-origin-allow-popups")
-      res.header("Access-Control-Allow-credentials", true);
+      // res.header("Access-Control-Allow-credentials", true);
       res.header("Access-Control-Allow-Headers", "Content-Type");
       next();
     });
@@ -74,7 +74,7 @@ async function verifyGoogleToken(token) {
 
 app.post("/signup", async (req, res) => {
   try {
-    // console.log({ verified: verifyGoogleToken(req.body.credential) });
+    
     if (req.body.credential) {
       const verificationResponse = await verifyGoogleToken(req.body.credential);
 
