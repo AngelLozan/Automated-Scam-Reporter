@@ -16,9 +16,7 @@ const useFetch = (url) => {
     })
       .then((res) => {
         setLoading(false);
-        let returned = res.json();
-        console.log(returned)
-        return returned;
+        return res.json();
       })
       .then((data) => {
         if (data?.user) {
@@ -32,6 +30,7 @@ const useFetch = (url) => {
         setError(error?.message);
       });
   };
+  
   return { loading, handleGoogle, error };
 };
 

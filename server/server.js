@@ -73,40 +73,37 @@ async function verifyGoogleToken(token) {
 
 
 app.post("/signup", async (req, res) => {
-
   try {
-    
+    // console.log({ verified: verifyGoogleToken(req.body.credential) });
     if (req.body.credential) {
-
       const verificationResponse = await verifyGoogleToken(req.body.credential);
-      
+
       if (verificationResponse.error) {
         return res.status(400).json({
           message: verificationResponse.error,
         });
       }
 
-      const profile = verificationResponse?.payload;
-      
+      const profile = await verificationResponse?.payload;
 
-      DB.push(profile);
+      await DB.push(profile);
+      res.set( "Content-Type", "application/json") 
 
-      res.set("Content-Type", "application/json");
-      res.status(201).json({
+      res.json({
+        message: "Signup was successful",
         user: {
           firstName: profile?.given_name,
           lastName: profile?.family_name,
           picture: profile?.picture,
           email: profile?.email,
           token: jwt.sign({ email: profile?.email }, "myScret", {
-            expiresIn: "1d"
-          })
-        }
+            expiresIn: "1d",
+          }),
+        },
       });
-
+     res.send();
     }
   } catch (error) {
-    console.log('==> Error at sign up registration failed.')
     res.status(500).json({
       message: "An error occurred. Registration failed.",
     });
@@ -114,42 +111,38 @@ app.post("/signup", async (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
-
   try {
-
     if (req.body.credential) {
       const verificationResponse = await verifyGoogleToken(req.body.credential);
-
       if (verificationResponse.error) {
-        console.log('==> Error at login verification response.')
         return res.status(400).json({
           message: verificationResponse.error,
         });
       }
 
-      const profile = verificationResponse?.payload;
-      console.log("==> Profile: ", profile)
+      const profile = await verificationResponse?.payload;
 
-      const existsInDB = DB.find((person) => person?.email === profile?.email);
+      const existsInDB = await DB.find((person) => person?.email === profile?.email);
 
       if (!existsInDB) {
         return res.status(400).json({
           message: "You are not registered. Please sign up",
         });
       }
-      res.set("Content-Type", "application/json");
-      res.status(201).json({
+      res.set( "Content-Type", "application/json") 
+      res.json({
+        message: "Login was successful",
         user: {
           firstName: profile?.given_name,
           lastName: profile?.family_name,
           picture: profile?.picture,
           email: profile?.email,
           token: jwt.sign({ email: profile?.email }, process.env.JWT_SECRET, {
-            expiresIn: "1d"
-          })
-        }
+            expiresIn: "1d",
+          }),
+        },
       });
-
+      res.send()
     }
   } catch (error) {
     res.status(500).json({
