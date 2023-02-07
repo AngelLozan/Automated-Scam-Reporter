@@ -179,7 +179,6 @@ app.get("/api/ready", (req, res) => {
         const url = req.body;
         const URL = url.URL;
         console.log('==> URL is: ', URL)
-        
         const confirm = await form(URL);
         res.json({message: confirm });
 
@@ -203,11 +202,17 @@ const form = async (url) => {
 
 
     async function getReport(_page, _delay) {
+      try {
         console.log("==> Getting link to form report and navigating there, stand by...")
         let linkEl = await _page.$eval('body > div > div:nth-child(2) > div > div.v1CNvb.sId0Ce > a:nth-child(1)', el => el.href)
-        //console.log(`==> Link is: ${linkEl}`)
         await _delay(1000)
         await _page.goto(linkEl);
+      } catch(e) {
+        let image = await page.screenshot({fullPage : true});
+        let strImg = image.toString('base64');
+        return(strImg);
+      }
+        
     };
 
 
@@ -273,16 +278,15 @@ const form = async (url) => {
     } catch (err) {
         let image = await page.screenshot({fullPage : true});
         let strImg = image.toString('base64');
-        return(strImg);
-        // let exists = await Object.values(err).includes("TimeoutError");
+        let exists = await Object.values(err).includes("TimeoutError");
 
-        // if (exists) {
-        //     console.log(" ✔ Timed out, but that's normal");
-        //     return('✔ Timed out');
-        // } else {
-        //     console.log("🛑 Error occurred, please check your node server console as well: ", { err });
-        //     return('"🛑 Error occurred, please check your node server:', err.message );
-        // }
+        if (exists) {
+            console.log(" ✔ Timed out, but that's normal");
+            return(strImg);
+        } else {
+            console.log("🛑 Error occurred, please check your node server console as well: ", { err });
+            return(strImg);
+        }
 
     } 
 
