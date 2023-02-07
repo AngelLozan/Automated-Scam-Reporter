@@ -40,7 +40,7 @@ const Landing = () => {
           Login
         </Link>
       </main>
-      <img src={logo} style={{ display: "block",  marginRight: "auto", marginLeft: "auto", marginTop:'10%', width: "40%" }} alt="logo" />
+      <img src={logo} style={{ display: "block",  marginRight: "auto", marginLeft: "auto", marginTop:'5%', width: "40%" }} alt="logo" />
     </>
   );
 };

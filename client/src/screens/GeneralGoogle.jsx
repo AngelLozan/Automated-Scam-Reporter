@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../ban.png';
+import exodus from '../EXODUS_symbol_colour.png'
 import '../App.css';
 
 const GeneralGoogle = ({user}) => {
@@ -119,8 +120,8 @@ const GeneralGoogle = ({user}) => {
 
       
 
-      <div style={{ textAlign: "center", margin: "3rem" }}>
-      <p>User {user?.email}</p>
+      <div style={{ backgroundImage: `url(${exodus})`, backgroundRepeat:"no-repeat", backgroundSize:"15%", backgroundPosition: 'center', textAlign: "center", margin: "5rem", padding:'10%' }}>
+      <p style={{width:'15%', textAlign: "center", margin:'auto'}}>User: {user?.email}</p>
         <button className="logout" onClick={logout}>
           Log Out
         </button>

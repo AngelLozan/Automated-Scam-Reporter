@@ -8,9 +8,9 @@ import useFetch from "../hooks/useFetch";
 
 const Login = () => {
   const { handleGoogle, loading, error } = useFetch(
-    "https://scamreporterfront.onrender.com/login"
+   "https://autoreporter.onrender.com/login"
   );
-  //"https://scamreporterfront.onrender.com/login"  "http://localhost:3000/login"
+  // "https://autoreporter.onrender.com/login"  "http://localhost:3000/login"
 
   useEffect(() => {
     /* global google */
@@ -38,7 +38,7 @@ const Login = () => {
         <Link to="/">Go Back</Link>
       </nav>
       <header style={{ textAlign: "center" }}>
-        <h1>Login to continue</h1>
+        <h1>Login with Exodus Account to Continue</h1>
       </header>
       <main
         style={{

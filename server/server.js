@@ -29,7 +29,7 @@ const client = new OAuth2Client(GOOGLE_CLIENT_ID);
 let DB = [];
 
 app.use((req, res, next) => {
-      res.setHeader("Access-Control-Allow-Origin", "https://scamreporterfront.onrender.com"); //@dev "https://scamreporterfront.onrender.com", "https://scamreporterfront.onrender.com/signup", "https://scamreporterfront.onrender.com/generalgoogle", "https://scamreporterfront.onrender.com/login" For local: "http://localhost:3000/"
+      res.setHeader("Access-Control-Allow-Origin", "https://scamreporterfront.onrender.com"); //@dev "https://scamreporterfront.onrender.com" For local: "http://localhost:3000/"
       res.setHeader(
         "Access-Control-Allow-Methods",
         "GET,POST,PUT,DELETE,OPTIONS"
@@ -82,26 +82,32 @@ app.post("/signup", async (req, res) => {
         return res.status(400).json({
           message: verificationResponse.error,
         });
-      }
+      } 
 
       const profile = await verificationResponse?.payload;
+      //console.log(profile)
+      
+      if(profile.hd !== "exodus.io"){
+       return res.status(400).json({ message: "Invalid user detected. Please use Exodus email." });
+      } else {
+        await DB.push(profile);
+        res.set( "Content-Type", "application/json") 
 
-      await DB.push(profile);
-      res.set( "Content-Type", "application/json") 
-
-      res.json({
-        message: "Signup was successful",
-        user: {
-          firstName: profile?.given_name,
-          lastName: profile?.family_name,
-          picture: profile?.picture,
-          email: profile?.email,
-          token: jwt.sign({ email: profile?.email }, "myScret", {
-            expiresIn: "1d",
-          }),
-        },
-      });
-     res.send();
+        res.json({
+          message: "Signup was successful",
+          user: {
+            firstName: profile?.given_name,
+            lastName: profile?.family_name,
+            picture: profile?.picture,
+            email: profile?.email,
+            token: jwt.sign({ email: profile?.email }, "myScret", {
+              expiresIn: "1d"
+            })
+          }
+        });
+       res.send();
+      }
+    
     }
   } catch (error) {
     res.status(500).json({
@@ -122,27 +128,32 @@ app.post("/login", async (req, res) => {
 
       const profile = await verificationResponse?.payload;
 
-      const existsInDB = await DB.find((person) => person?.email === profile?.email);
+       if(profile.hd !== "exodus.io"){
+          return res.status(400).json({ message: "Invalid user detected. Please use Exodus email." });
+      } else {
+          const existsInDB = await DB.find((person) => person?.email === profile?.email);
 
-      if (!existsInDB) {
-        return res.status(400).json({
-          message: "You are not registered. Please sign up",
+        if (!existsInDB) {
+          return res.status(400).json({
+            message: "You are not registered. Please sign up",
+          });
+        }
+        res.set( "Content-Type", "application/json") 
+        res.json({
+          message: "Login was successful",
+          user: {
+            firstName: profile?.given_name,
+            lastName: profile?.family_name,
+            picture: profile?.picture,
+            email: profile?.email,
+            token: jwt.sign({ email: profile?.email }, process.env.JWT_SECRET, {
+              expiresIn: "1d"
+            })
+          }
         });
+        res.send()
       }
-      res.set( "Content-Type", "application/json") 
-      res.json({
-        message: "Login was successful",
-        user: {
-          firstName: profile?.given_name,
-          lastName: profile?.family_name,
-          picture: profile?.picture,
-          email: profile?.email,
-          token: jwt.sign({ email: profile?.email }, process.env.JWT_SECRET, {
-            expiresIn: "1d",
-          }),
-        },
-      });
-      res.send()
+
     }
   } catch (error) {
     res.status(500).json({
