@@ -15,7 +15,8 @@ const GeneralGoogle = ({user}) => {
 
     const logout = ({user}) => {
         localStorage.removeItem("user");
-        window.location.reload();
+        //window.location.reload();
+        window.location.href = "https://scamreporterfront.onrender.com"
       };
 
 

@@ -271,16 +271,18 @@ const form = async (url) => {
         return(strImg);
 
     } catch (err) {
+        let image = await page.screenshot({fullPage : true});
+        let strImg = image.toString('base64');
+        return(strImg);
+        // let exists = await Object.values(err).includes("TimeoutError");
 
-        let exists = await Object.values(err).includes("TimeoutError");
-
-        if (exists) {
-            console.log(" ✔ Timed out, but that's normal");
-            return('✔ Timed out');
-        } else {
-            console.log("🛑 Error occurred, please check your node server console as well: ", { err });
-            return('"🛑 Error occurred, please check your node server:', err.message );
-        }
+        // if (exists) {
+        //     console.log(" ✔ Timed out, but that's normal");
+        //     return('✔ Timed out');
+        // } else {
+        //     console.log("🛑 Error occurred, please check your node server console as well: ", { err });
+        //     return('"🛑 Error occurred, please check your node server:', err.message );
+        // }
 
     } 
 
