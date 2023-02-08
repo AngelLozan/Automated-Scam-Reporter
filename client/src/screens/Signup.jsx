@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
+import exodus from '../EXODUS_symbol_colour.png'
 
 // https://developers.google.com/identity/gsi/web/reference/js-reference
 
@@ -34,7 +35,11 @@ const SignUp = () => {
   return (
     <>
       <nav style={{ padding: "2rem" }}>
-        <Link to="/">Go Back</Link>
+        <Link to="/">
+        <button className='button4'>
+        Go Back
+        </button>
+        </Link>
       </nav>
       <header style={{ textAlign: "center" }}>
         <h1>Register with Exodus Account to Continue</h1>
@@ -54,6 +59,8 @@ const SignUp = () => {
           <div id="signUpDiv" data-text="signup_with"></div>
         )}
       </main>
+       <br/>
+      <img className="signedIn" src={exodus} alt="Exodus logo"></img>
       <footer></footer>
     </>
   );

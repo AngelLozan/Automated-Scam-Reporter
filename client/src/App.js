@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { GeneralGoogle, Landing, Login, Signup } from "./screens";
+import { GeneralGoogle, Landing, Login, Signup, Home, TikTok } from "./screens";
+import Navbar from './components/Navbar.js';
 
 const App = () => {
     const [user, setUser] = useState({});
+    const [showNav, setShowNav] = useState(false);
 
 
   useEffect(() => {
@@ -13,29 +15,46 @@ const App = () => {
     if (theUser && !theUser.includes("undefined")) {
       console.log(theUser)
       setUser(JSON.parse(theUser));
+      setShowNav(true)
     }
   }, []);
 
     return (
 
       <BrowserRouter>
+
+      { showNav && 
+
+      <Navbar />
+
+      }
+      
+
       <Routes>
 
       <Route
       path="/"
-      element={user?.email ? <Navigate to="/generalgoogle" /> : <Landing />}
+      element={user?.email ? <Navigate to="/home" /> : <Landing />}
       />
       <Route
         path="/signup"
-        element={user?.email ? <Navigate to="/generalgoogle" /> : <Signup />}
+        element={user?.email ? <Navigate to="/home" /> : <Signup />}
       />
       <Route
         path="/login"
-        element={user?.email ? <Navigate to="/generalgoogle" /> : <Login />}
+        element={user?.email ? <Navigate to="/home" /> : <Login />}
+      />
+      <Route
+        path="/home"
+        element={user?.email ? <Home user={user} /> : <Navigate to="/" />}
       />
       <Route
         path="/generalgoogle"
-        element={user?.email ? <GeneralGoogle user={user} /> : <Navigate to="/" />}
+        element={user?.email ? <GeneralGoogle user={user} /> : <Navigate to="/generalgoogle" />}
+      />
+      <Route
+        path="/tiktok"
+        element={user?.email ? <TikTok user={user} /> : <Navigate to="/tiktok" />}
       />
 
       </Routes>

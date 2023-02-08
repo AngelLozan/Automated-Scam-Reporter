@@ -3,7 +3,7 @@ import logo from '../ban.png';
 //import exodus from '../EXODUS_symbol_colour.png'
 import '../App.css';
 
-const GeneralGoogle = ({user}) => {
+const TikTok = ({user}) => {
     const [ready, setReady] = React.useState(null);
     const [Data, setData] = React.useState(null);
     const [urlData, setUrlData] = React.useState('');
@@ -15,7 +15,7 @@ const GeneralGoogle = ({user}) => {
 
 
     const form = (e) => {
-        fetch('https://autoreporter.onrender.com/api/google', { //@dev https://autoreporter.onrender.com/api/google for local test: /api
+        fetch('https://autoreporter.onrender.com/api/tiktok', { //@dev https://autoreporter.onrender.com/api/tiktok for local test: /api
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ URL: `${urlData}` }), //JSON.stringify(urlData),
@@ -85,7 +85,7 @@ const GeneralGoogle = ({user}) => {
       <header className="App-header">
         <img src={logo} className={loading ? 'App-logo-spin' : 'App-logo'} alt="logo" />
       </header>
-      <h2>Google Forms</h2>
+      <h2>Tik Tok</h2>
       <p>{!ready ? "Server not ready yet" : ready}</p>
 
       <form onSubmit={handleSubmit}>
@@ -120,4 +120,4 @@ const GeneralGoogle = ({user}) => {
 }
 
 
-export default GeneralGoogle;
+export default TikTok;

@@ -22,6 +22,8 @@ Local testing add   `"proxy": "http://localhost:8080",` to root package.json (ab
 - `GeneralGoogle.jsx`
 - `Signup.jsx`
 - `Login.jsx`
+- `Home.jsx`
+- `TikTok.jsx`
 
 
   
