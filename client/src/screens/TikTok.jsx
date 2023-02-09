@@ -65,8 +65,6 @@ const TikTok = ({user}) => {
     function copyToClipboard(e) {
         textAreaRef.current.select();
         document.execCommand('copy');
-        // This is just personal preference.
-        // I prefer to not show the whole text area selected.
         e.target.focus();
         setCopySuccess('Copied!');
 
@@ -84,8 +82,8 @@ const TikTok = ({user}) => {
       <header className="App-header">
         <img src={logo} className={loading ? 'App-logo-spin' : 'App-logo'} alt="logo" />
       </header>
-      <h2>Tik Tok</h2>
-      <p>*Currently not functional. This action takes one parameter, a TikTok Profile URL and fills the TradeMark report against it.</p>
+      <h2>Twitter Trademark</h2>
+      <p>This action takes one parameter, a Twitter Profile URL and fills the TradeMark report against it.</p>
       <p>{!ready ? "Server not ready yet" : ready}</p>
 
       <form onSubmit={handleSubmit}>

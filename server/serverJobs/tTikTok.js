@@ -13,16 +13,6 @@ const tTok = async (url) => {
          });
      }
 
-     async function usernameUse(_page){
-        //console.log('==> Select do not want to use username')
-            await page.waitForTimeout(500),
-            await _page.keyboard.press('Tab')
-            await _page.waitForTimeout(500)
-            await _page.keyboard.press('Tab')
-            await _page.waitForTimeout(500)
-            await _page.keyboard.press('ArrowDown')
-            await _page.waitForTimeout(500)
-     };
 
     //@dev Differs by report. Need to add username to report when calling script.
     let scammerLink = url;

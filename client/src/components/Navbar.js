@@ -39,7 +39,7 @@ export default function Navbar() {
             <a href="/generalgoogle">Google Forms</a>
           </li>
           <li>
-            <a href="/tiktok">TikTok</a>
+            <a href="/youtube">Youtube Full</a>
           </li>
           <li>
             <a href="/cloudflare">CloudFlare</a>
