@@ -104,7 +104,7 @@ try {
         console.log("==> Submit")
         await page.waitForSelector(submit)
         await page.waitForTimeout(1000)
-        //await page.click(submit)
+        await page.click(submit)
         await page.waitForTimeout(500)
 
         console.log("✅ Completed the cloudflare report form.")
