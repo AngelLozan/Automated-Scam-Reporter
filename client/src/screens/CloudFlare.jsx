@@ -96,6 +96,7 @@ const CloudFlare = ({ user }) => {
                 />
             </header>
             <h2>Cloud Flare Abuse</h2>
+            <p>This action takes two parameters, a URL to a scam site and what type of site the scam is, indicated by the checkbox. If neither checkbox is selected, the report verbiage describes a general phishing site. fills the abuse report against it.</p>
             <p>{!ready ? "Server not ready yet" : ready}</p>
 
             <form onSubmit={handleSubmit}>

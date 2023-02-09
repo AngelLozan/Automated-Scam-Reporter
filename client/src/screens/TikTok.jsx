@@ -53,7 +53,7 @@ const TikTok = ({user}) => {
     }
 
     const serverReady = () => {
-        fetch("/api/ready") //@dev https://autoreporter.onrender.com/api/ready for local test: /api/ready
+        fetch("https://autoreporter.onrender.com/api/ready") //@dev https://autoreporter.onrender.com/api/ready for local test: /api/ready
             .then((res) => res.json())
             .then((r) => {
                 console.log(r)
@@ -85,6 +85,7 @@ const TikTok = ({user}) => {
         <img src={logo} className={loading ? 'App-logo-spin' : 'App-logo'} alt="logo" />
       </header>
       <h2>Tik Tok</h2>
+      <p>This will take one parameter, a TikTok Profile URL and fill the TradeMark report against it.</p>
       <p>{!ready ? "Server not ready yet" : ready}</p>
 
       <form onSubmit={handleSubmit}>

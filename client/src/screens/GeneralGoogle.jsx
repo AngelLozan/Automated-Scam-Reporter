@@ -85,6 +85,7 @@ const GeneralGoogle = ({user}) => {
         <img src={logo} className={loading ? 'App-logo-spin' : 'App-logo'} alt="logo" />
       </header>
       <h2>Google Forms</h2>
+      <p>This action takes one parameter, a scam google form URL and reports it via the "report abuse" functionality in the form.</p>
       <p>{!ready ? "Server not ready yet" : ready}</p>
 
       <form onSubmit={handleSubmit}>
