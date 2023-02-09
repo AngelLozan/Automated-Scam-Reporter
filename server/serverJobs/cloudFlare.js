@@ -34,7 +34,7 @@ async function Cloud(url, _WC, _BLOG) {
     }
 
 //@dev Executable path comes from chromium package. Error thrown when attempt to download chromium with head and without specified package. 
-    const browser = await puppeteer.launch( { headless: false, executablePath: chromium.path, args: ['--no-sandbox', '--disable-setuid-sandbox', '--no-first-run', '--no-default-browser-check']});
+    const browser = await puppeteer.launch( {executablePath: chromium.path, args: ['--no-sandbox', '--disable-setuid-sandbox', '--no-first-run', '--no-default-browser-check']});
 
 
     //@dev Reuse same tab in browser window.

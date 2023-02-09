@@ -85,7 +85,7 @@ const TikTok = ({user}) => {
         <img src={logo} className={loading ? 'App-logo-spin' : 'App-logo'} alt="logo" />
       </header>
       <h2>Tik Tok</h2>
-      <p>This action takes one parameter, a TikTok Profile URL and fills the TradeMark report against it.</p>
+      <p>*Currently not functional. This action takes one parameter, a TikTok Profile URL and fills the TradeMark report against it.</p>
       <p>{!ready ? "Server not ready yet" : ready}</p>
 
       <form onSubmit={handleSubmit}>
