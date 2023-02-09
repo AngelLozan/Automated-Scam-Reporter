@@ -3,6 +3,7 @@ import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import fs from 'fs-extra';
 import form from './serverJobs/form.js';
 import tTok from './serverJobs/tTikTok.js';
+import Cloud from './serverJobs/cloudFlare.js';
 //import bodyParser from 'body-parser';
 import express from 'express';
 import chromium from 'chromium';
@@ -189,6 +190,20 @@ app.post("/api/tiktok", async (req, res) => {
         const URL = url.URL;
         console.log('==> URL is: ', URL)
         const confirm = await tTok(URL);
+        res.status(201).json({message: confirm })
+        // res.json({message: confirm });
+        // res.send()
+})
+
+app.post("/api/cloudflare", async (req, res) => {
+        const data = req.body;
+        const URL = data.URL;
+        const WC = data.WC;
+        const BLOG = data.BLOG;
+        console.log('==> URL is: ', URL)
+        console.log('==> WC is: ', WC)
+        console.log('==> BLOG is: ', BLOG)
+        const confirm = await Cloud(URL, WC, BLOG);
         res.status(201).json({message: confirm })
         // res.json({message: confirm });
         // res.send()

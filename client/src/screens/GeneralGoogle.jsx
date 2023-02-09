@@ -1,6 +1,5 @@
 import React from 'react';
 import logo from '../ban.png';
-//import exodus from '../EXODUS_symbol_colour.png'
 import '../App.css';
 
 const GeneralGoogle = ({user}) => {

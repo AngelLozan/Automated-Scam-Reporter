@@ -81,13 +81,15 @@ button[type=submit]:hover {
   margin-left: auto;
 }
 
-.logout{
-    color: "black";
-    border: "1px solid gray";
-    backgroundColor: "white";
-    padding: "0.5rem 1rem";
-    cursor: "pointer";
+.logout {
+  background-color: white;
+  color: black;
+  border: 2px solid #e7e7e7;
+  padding: 14px 40px;
+  border-radius: 12px;
 }
+
+.logout:hover {background-color: orangered;}
 
 .signedIn{
   border-radius: 50%;
@@ -103,6 +105,7 @@ button[type=submit]:hover {
   padding: 5px;
   max-width: 20%;
 }
+
 
 .navigation-menu ul {
   display: flex;
@@ -127,7 +130,7 @@ button[type=submit]:hover {
 }
 
 .navigation-menu li a:.active {
-  background-color: lightgrey;
+  background-color: darkgrey;
 }
 
 .navigation-menu li a:hover:not(.active) {

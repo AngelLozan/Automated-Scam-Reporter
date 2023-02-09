@@ -1,6 +1,5 @@
 import React from 'react';
 import logo from '../ban.png';
-//import exodus from '../EXODUS_symbol_colour.png'
 import '../App.css';
 
 const TikTok = ({user}) => {
@@ -54,7 +53,7 @@ const TikTok = ({user}) => {
     }
 
     const serverReady = () => {
-        fetch("https://autoreporter.onrender.com/api/ready") //@dev https://autoreporter.onrender.com/api/ready for local test: /api/ready
+        fetch("/api/ready") //@dev https://autoreporter.onrender.com/api/ready for local test: /api/ready
             .then((res) => res.json())
             .then((r) => {
                 console.log(r)

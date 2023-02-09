@@ -24,6 +24,20 @@ Local testing add   `"proxy": "http://localhost:8080",` to root package.json (ab
 - `Login.jsx`
 - `Home.jsx`
 - `TikTok.jsx`
+  
+
+## Project Organization
+
+Two environment variables are needed in the server and one in the client side, which enable google authentication. 
+
+The server is found on server.js and puppeteer scripts are stored as serverJobs and exported. 
+
+The client side uses routing and screens to call different automated tasks according to the type of task.
+
+Server job names and screen names should correspond, so that one screen may suffice to call multiple jobs in the future. 
+
+Navbar, index.js in screens and App.js all need updating when a new screen is added. 
+
 
 
   

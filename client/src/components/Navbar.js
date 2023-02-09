@@ -6,8 +6,6 @@ export default function Navbar() {
 	  const [isNavExpanded, setIsNavExpanded] = useState(false);
 
 
-
-
   return (
     <nav className="navigation">
       <a href="/" className="brand-name">
@@ -42,6 +40,9 @@ export default function Navbar() {
           </li>
           <li>
             <a href="/tiktok">TikTok</a>
+          </li>
+          <li>
+            <a href="/cloudflare">CloudFlare</a>
           </li>
         </ul>
       </div>
