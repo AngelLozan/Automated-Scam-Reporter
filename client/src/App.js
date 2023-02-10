@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { GeneralGoogle, Landing, Login, Signup, Home, TikTok, CloudFlare, Youtube } from "./screens";
+import { GeneralGoogle, Landing, Login, Signup, Home, TikTok, CloudFlare, PDR } from "./screens";
 import Navbar from './components/Navbar.js';
 
 const App = () => {
@@ -53,8 +53,8 @@ const App = () => {
         element={user?.email ? <GeneralGoogle user={user} /> : <Navigate to="/generalgoogle" />}
       />
       <Route
-        path="/youtube"
-        element={user?.email ? <Youtube user={user} /> : <Navigate to="/youtube" />}
+        path="/pdr"
+        element={user?.email ? <PDR user={user} /> : <Navigate to="/pdr" />}
       />
       <Route
         path="/cloudflare"

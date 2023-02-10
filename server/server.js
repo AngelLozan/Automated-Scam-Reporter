@@ -4,7 +4,7 @@ import fs from 'fs-extra';
 import form from './serverJobs/form.js';
 import tTok from './serverJobs/tTikTok.js';
 import Cloud from './serverJobs/cloudFlare.js';
-import Youtube from './serverJobs/youtube.js';
+import PDR from './serverJobs/pdr.js';
 //import bodyParser from 'body-parser';
 import express from 'express';
 import chromium from 'chromium';
@@ -196,7 +196,7 @@ app.post("/api/tiktok", async (req, res) => {
         // res.send()
 })
 
-app.post("/api/youtube", async (req, res) => {
+app.post("/api/pdr", async (req, res) => {
         const data = req.body;
         const URL = data.URL;
         const WC = data.WC;
@@ -204,7 +204,7 @@ app.post("/api/youtube", async (req, res) => {
         console.log('==> URL is: ', URL)
         console.log('==> WC is: ', WC)
         console.log('==> BLOG is: ', BLOG)
-        const confirm = await Youtube(URL, WC, BLOG);
+        const confirm = await PDR(URL, WC, BLOG);
         res.status(201).json({message: confirm })
         // res.json({message: confirm });
         // res.send()

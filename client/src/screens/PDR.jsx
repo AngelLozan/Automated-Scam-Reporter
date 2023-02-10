@@ -3,7 +3,7 @@ import logo from "../ban.png";
 import "../App.css";
 import Checkbox from "../components/Checkbox.js";
 
-const Youtube = ({ user }) => {
+const PDR = ({ user }) => {
     const [ready, setReady] = React.useState(null);
     const [Data, setData] = React.useState(null);
     const [urlData, setUrlData] = React.useState("");
@@ -16,8 +16,8 @@ const Youtube = ({ user }) => {
     const [blog, setBlog] = React.useState(false);
 
     const form = (e) => {
-        fetch("https://autoreporter.onrender.com/api/youtube", {
-            //@dev https://autoreporter.onrender.com/api/youtube for local test: /api/youtube
+        fetch("https://autoreporter.onrender.com/api/pdr", {
+            //@dev https://autoreporter.onrender.com/api/pdr for local test: /api/pdr
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ 
@@ -95,8 +95,8 @@ const Youtube = ({ user }) => {
                     alt="logo"
                 />
             </header>
-            <h2>Youtube Video & Profile Report</h2>
-            <p>This action takes two parameters, a URL to a scam site and what type of scam, indicated by the checkbox. If neither checkbox is selected, the report verbiage describes a general malicious video. Reports video and profile.</p>
+            <h2>Public Domain Registry Report</h2>
+            <p>This action takes two parameters, a URL to a scam site and what type of scam, indicated by the checkbox. If neither checkbox is selected, the report verbiage describes a general malicious site. Fills PDR abuse report.</p>
             <p>{!ready ? "Server not ready yet" : ready}</p>
 
             <form onSubmit={handleSubmit}>
@@ -107,16 +107,16 @@ const Youtube = ({ user }) => {
                     tabIndex="1"
                 />
                   <br/>
-                <p>If applicable, indicate if this is affiliated with a link in the comment or description before submitting:</p>
+                <p>If applicable, indicate if this is affiliated with a wallet connect or blog scam before submitting:</p>
                 <Checkbox
-                    label="Link in Comment"
+                    label="Wallet Connect"
                     value={blog}
                     onChange={handleCheckOne}
                 />
                 <br/>
                 <br/>
                 <Checkbox
-                    label="Link in Description"
+                    label="Blogging Scam"
                     value={walletConnect}
                     onChange={handleCheckTwo}
                 />
@@ -156,4 +156,4 @@ const Youtube = ({ user }) => {
     );
 };
 
-export default Youtube;
+export default PDR;

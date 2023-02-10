@@ -39,7 +39,7 @@ export default function Navbar() {
             <a href="/generalgoogle">Google Forms</a>
           </li>
           <li>
-            <a href="/youtube">Youtube Full</a>
+            <a href="/pdr">Public Domain Registry</a>
           </li>
           <li>
             <a href="/cloudflare">CloudFlare</a>

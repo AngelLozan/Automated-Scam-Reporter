@@ -5,5 +5,5 @@ export { default as GeneralGoogle } from './GeneralGoogle';
 export { default as Home } from "./Home";
 export { default as TikTok } from "./TikTok";
 export { default as CloudFlare } from "./CloudFlare";
-export { default as Youtube } from "./Youtube";
+export { default as PDR } from "./PDR";
 

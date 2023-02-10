@@ -22,8 +22,8 @@ async function Cloud(url, _WC, _BLOG) {
     let comment;
 
     if ( _WC === "true" ) {
-            reportType = "🍉 Wallet Connect";
-            comment = 'This is a scam phishing website and not affiliated with any of the wallet platforms listed. This site phishes people\'s login phrase information and then steals their money. Clicking any of the wallet logos opens the page where info is phished. We have already started receiving support tickets from customers who have been scammed out of thousands of dollars. Please help us by shutting it down. Thank you! \n \n Scott Lozano \n Exodus Wallet Security Team \n scott.lo@exodus.com';
+        reportType = "🍉 Wallet Connect";
+        comment = 'This is a scam phishing website and not affiliated with any of the wallet platforms listed. This site phishes people\'s login phrase information and then steals their money. Clicking any of the wallet logos opens the page where info is phished. We have already started receiving support tickets from customers who have been scammed out of thousands of dollars. Please help us by shutting it down. Thank you! \n \n Scott Lozano \n Exodus Wallet Security Team \n scott.lo@exodus.com';
     } else if ( _BLOG === "true" ) {
         reportType = "🖋 Blog Phishing";
         comment = 'This is a blog that contains a link to a scam phishing website and not the real Exodus wallet. This blog is promoting a site that has copied our website using our trademarked company name and logo to impersonate us. The link redirects to a fake site that phishes people\'s login phrase information and then steals their money. We have already started receiving support tickets from customers who have been scammed out of thousands of dollars. Please help us by shutting it down. Thank you! \n \n Scott Lozano \n Exodus Wallet Security Team \n scott.lo@exodus.com';
@@ -36,18 +36,31 @@ async function Cloud(url, _WC, _BLOG) {
 //@dev Executable path comes from chromium package. Error thrown when attempt to download chromium with head and without specified package. 
     const browser = await puppeteer.launch( {executablePath: chromium.path, args: ['--no-sandbox', '--disable-setuid-sandbox', '--no-first-run', '--no-default-browser-check']});
 
+    const cookies = [
+  {
+    name: '__cf_bm',
+    path: '/',
+    expires: 1709251199,
+    size: 152,
+    httpOnly: true,
+    secure: true,
+    session: false,
+    sameSite: 'None',
+    sameParty: false,
+    sourceScheme: 'Secure',
+    sourcePort: 443
+  }
+];
 
     //@dev Reuse same tab in browser window.
     const pages = await browser.pages();
     const page = await pages[0];
     await page.goto('https://abuse.cloudflare.com/phishing');
+    await page.setCookie(...cookies)
     console.log("🌧 Starting Cloudflare Phishing reporting process, just a moment...");
     console.log(`Reporting: ${scamLink} for ${reportType}`);
 
-    await page.setViewport({
-         width: 1366,
-         height: 786
-     });
+
 
 //@dev Set constants for page selectors
 const name = 'input[name="name"]';

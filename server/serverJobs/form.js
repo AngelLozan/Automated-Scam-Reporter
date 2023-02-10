@@ -36,11 +36,6 @@ const form = async (url) => {
     console.log("📎 Starting Google form reporting process, just a moment...");
     console.log("Reporting: ", scamLink);
 
-    await page.setViewport({
-        width: 1366,
-        height: 786
-    });
-
     //@dev Set constants for page selectors
     const spam = 'div[data-value="SPAM"]';
     const submit = 'body > div > div:nth-child(2) > form > div.GtnJQe > div.U26fgb.O0WRkf.zZhnYe.e3Duub.C0oVfc.M9Bg4d > div.ZFr60d.CeoRYc';
