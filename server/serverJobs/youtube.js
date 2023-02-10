@@ -206,10 +206,12 @@ const Youtube = async (url, _WC, _BLOG) => {
     console.log("📼 Starting youtube scam reporting process, just a moment...");
     console.log("Reporting: ", scamLink);
 
-    await page.setViewport({
-        width: 1366,
-        height: 786
-    });
+     await page.setViewport({
+         width: 1200,
+         height: 800
+     });
+
+    await page.setDefaultNavigationTimeout(0);
 
     //@dev Set constants for page selectors
 
